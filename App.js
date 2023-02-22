@@ -8,6 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Home from "./components/Home";
 import * as SecureStorage from "expo-secure-store";
 import Logout from "./components/Logout";
+import Ships from "./components/Ships";
 
 export default function App() {
     const [userIsLogged, setUserIsLogged] = useState(false);
@@ -54,6 +55,7 @@ export default function App() {
                 <NavigationContainer>
                     <Drawer.Navigator initialRouteName="Home">
                         <Drawer.Screen name="Home">{() => <Home userData={userData} />}</Drawer.Screen>
+                        <Drawer.Screen name="Ships">{() => <Ships userToken={userToken} />}</Drawer.Screen>
                         <Drawer.Screen name="Logout">{() => <Logout saveToken={saveToken} />}</Drawer.Screen>
                     </Drawer.Navigator>
                 </NavigationContainer>
