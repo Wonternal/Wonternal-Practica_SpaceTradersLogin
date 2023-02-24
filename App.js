@@ -9,16 +9,19 @@ import Home from "./components/Home";
 import * as SecureStorage from "expo-secure-store";
 import Logout from "./components/Logout";
 import Ships from "./components/Ships";
+import Loans from "./components/Loans";
 
 export default function App() {
+    const [options, setOptions] = useState(true);
     const [userIsLogged, setUserIsLogged] = useState(false);
-    const [userToken, setUserToken] = useState(false);
+    const [userToken, setUserToken] = useState("");
     const [userData, setUserData] = useState({});
     const STORED_TOKEN_KEY = "spaceTradersToken";
 
     const saveToken = async (value, action) => {
         await SecureStorage.setItemAsync(STORED_TOKEN_KEY, value);
         setUserIsLogged(action);
+        setUserToken(value);
     };
 
     const getStoragedTokenValue = async () => {
@@ -54,7 +57,8 @@ export default function App() {
             {userIsLogged ? (
                 <NavigationContainer>
                     <Drawer.Navigator initialRouteName="Home">
-                        <Drawer.Screen name="Home">{() => <Home userData={userData} />}</Drawer.Screen>
+                        <Drawer.Screen name="Home">{() => <Home userToken={userToken} />}</Drawer.Screen>
+                        <Drawer.Screen name="Loans">{() => <Loans userToken={userToken} />}</Drawer.Screen>
                         <Drawer.Screen name="Ships">{() => <Ships userToken={userToken} />}</Drawer.Screen>
                         <Drawer.Screen name="Logout">{() => <Logout saveToken={saveToken} />}</Drawer.Screen>
                     </Drawer.Navigator>
@@ -62,9 +66,9 @@ export default function App() {
             ) : (
                 <NavigationContainer>
                     <Drawer.Navigator initialRouteName="Home">
-                        <Drawer.Screen name="Options" component={OptionsScreen} />
-                        <Drawer.Screen name="Register">{() => <Register saveToken={saveToken} />}</Drawer.Screen>
+                        {options && <Drawer.Screen name="Options">{() => <OptionsScreen setOptions={setOptions} />}</Drawer.Screen>}
                         <Drawer.Screen name="Login">{() => <Login saveToken={saveToken} />}</Drawer.Screen>
+                        <Drawer.Screen name="Register">{() => <Register saveToken={saveToken} />}</Drawer.Screen>
                     </Drawer.Navigator>
                 </NavigationContainer>
             )}

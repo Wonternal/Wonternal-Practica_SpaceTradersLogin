@@ -7,8 +7,9 @@ const Ships = ({ userToken }) => {
         fetch(`https://api.spacetraders.io/systems/OE/ship-listings?token=${userToken}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
-                setShips(data.shipListings);
+                if (data.shipListings != null) {
+                    setShips(data.shipListings);
+                }
             });
     }, []);
 
