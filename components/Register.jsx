@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Button, TextInput, Text, StyleSheet } from "react-native";
+import { View, Button, TextInput, Text, StyleSheet, ImageBackground } from "react-native";
 
 const Register = ({ saveToken }) => {
     const [inputText, setInputText] = useState("");
@@ -24,9 +24,11 @@ const Register = ({ saveToken }) => {
     };
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Please select your nickname</Text>
-            <TextInput style={styles.input} onChangeText={(text) => setInputText(text)}></TextInput>
-            <Button title="Register" onPress={handleOnClickRegister}></Button>
+            <ImageBackground source={require("../assets/backgroundShips.jpg")} style={styles.image}>
+                <Text style={styles.text}>Please select your nickname</Text>
+                <TextInput style={styles.input} onChangeText={(text) => setInputText(text)}></TextInput>
+                <Button title="Register" onPress={handleOnClickRegister}></Button>
+            </ImageBackground>
         </View>
     );
 };
@@ -34,22 +36,26 @@ const Register = ({ saveToken }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
+    },
+    image: {
+        flex: 1,
         justifyContent: "center",
+        alignItems: "center",
     },
     input: {
         height: 30,
-        width: "90%",
-        borderWidth: 1,
+        width: "80%",
+        borderWidth: 2,
         borderColor: "black",
+        color: "white",
         textAlign: "center",
         marginBottom: 10,
-        borderRadius: 10,
+        borderRadius: 7,
     },
     text: {
-        fontSize: 20,
-        marginBottom: 10,
+        color: "white",
+        fontSize: 25,
+        marginBottom: 15,
     },
 });
 

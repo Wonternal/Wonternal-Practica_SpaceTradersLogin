@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Button, StyleSheet, Text, ImageBackground, FlatList } from "react-native";
+import { View, StyleSheet, Text, ImageBackground, FlatList } from "react-native";
 
 const Ships = ({ userToken }) => {
     const [ships, setShips] = useState([]);

@@ -26,15 +26,19 @@ const Home = ({ userToken }) => {
                     <>
                         <View style={styles.userNameContainer}>
                             <Image source={require("../assets/avatar.png")} style={styles.avatarImage} />
-                            <Text style={{ color: "white" }}>{userData.username}</Text>
+                            <Text style={{ color: "white", fontSize: 20 }}>{userData.username}</Text>
                         </View>
-                        <View>
+                        <View style={styles.creditsContainer}>
                             <Text>{userData.credits} crd</Text>
                         </View>
 
-                        <View>
-                            <Text>ships {userData.shipCount}</Text>
-                            <Text>structures {userData.structureCount}</Text>
+                        <View style={styles.shipsAndStructuresContainer}>
+                            <Text>
+                                <Image source={require("../assets/spaceship.png")} style={{ width: 20, height: 20 }} />- {userData.shipCount}
+                            </Text>
+                            <Text>
+                                <Image source={require("../assets/structures.png")} style={{ width: 20, height: 20 }} />- {userData.structureCount}
+                            </Text>
                         </View>
                     </>
                 )}
@@ -64,6 +68,22 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: 1,
         marginRight: 10,
+    },
+    creditsContainer: {
+        padding: 10,
+        backgroundColor: "white",
+        borderRadius: 7,
+        borderWidth: 1,
+        borderColor: "black",
+        marginTop: 10,
+    },
+    shipsAndStructuresContainer: {
+        padding: 10,
+        backgroundColor: "white",
+        borderRadius: 7,
+        borderWidth: 1,
+        borderColor: "black",
+        marginTop: 10,
     },
 });
 
