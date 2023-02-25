@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, ImageBackground, FlatList } from "react-native";
+import { View, StyleSheet, Text, ImageBackground, FlatList, Image } from "react-native";
 
 const Ships = ({ userToken }) => {
     const [ships, setShips] = useState([]);
@@ -13,16 +13,30 @@ const Ships = ({ userToken }) => {
             });
     }, []);
 
+    const shipsImages = [
+        require("../assets/Ship_1.png"),
+        require("../assets/Ship_2.png"),
+        require("../assets/Ship_3.png"),
+        require("../assets/Ship_4.png"),
+        require("../assets/Ship_5.png"),
+        require("../assets/Ship_1.png"),
+        require("../assets/Ship_2.png"),
+        require("../assets/Ship_3.png"),
+        require("../assets/Ship_4.png"),
+        require("../assets/Ship_5.png"),
+        require("../assets/Ship_1.png"),
+        require("../assets/Ship_2.png"),
+    ];
     return (
         <View style={styles.container}>
             <ImageBackground source={require("../assets/backgroundShips.jpg")} resizeMode="cover" style={styles.image}>
                 <Text style={{ color: "white", fontSize: 30, marginTop: 10 }}>Available Ships</Text>
                 <FlatList
                     data={ships}
-                    renderItem={({ item }) => (
+                    renderItem={({ item, index }) => (
                         <View style={styles.shipRow}>
-                            <View style={{ marginRight: 10 }}>
-                                <Text>Image</Text>
+                            <View style={{ marginRight: 10, justifyContent: "center" }}>
+                                <Image source={shipsImages[index]} />
                             </View>
                             <View>
                                 <Text>Type: {item.type}</Text>
