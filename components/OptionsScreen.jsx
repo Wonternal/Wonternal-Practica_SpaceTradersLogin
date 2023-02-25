@@ -1,27 +1,29 @@
 import React from "react";
-import { View, Button, StyleSheet } from "react-native";
+import { View, Button, StyleSheet, ImageBackground } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const OptionsScreen = ({ setOptions }) => {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <Button
-                style={styles.button}
-                title="Login"
-                onPress={() => {
-                    navigation.navigate("Login");
-                    setOptions(false);
-                }}
-            ></Button>
-            <View style={styles.buttonSeparator}></View>
-            <Button
-                title="Register"
-                onPress={() => {
-                    navigation.navigate("Register");
-                    setOptions(false);
-                }}
-            ></Button>
+            <ImageBackground source={require("../assets/backgroundShips.jpg")} style={styles.image}>
+                <Button
+                    style={styles.button}
+                    title="Login"
+                    onPress={() => {
+                        navigation.navigate("Login");
+                        setOptions(false);
+                    }}
+                ></Button>
+                <View style={styles.buttonSeparator}></View>
+                <Button
+                    title="Register"
+                    onPress={() => {
+                        navigation.navigate("Register");
+                        setOptions(false);
+                    }}
+                ></Button>
+            </ImageBackground>
         </View>
     );
 };
@@ -29,7 +31,9 @@ const OptionsScreen = ({ setOptions }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+    },
+    image: {
+        flex: 1,
         alignItems: "center",
         justifyContent: "center",
     },
