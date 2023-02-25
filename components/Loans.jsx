@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, ImageBackground } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const Loans = ({ userToken }) => {
@@ -29,30 +29,47 @@ const Loans = ({ userToken }) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                if (data.error.code === 422) {
+                if (data.error) {
                     alert("Only one loan allowed at a time");
-                } else if (data.error) {
-                    alert("Ops, something went wrong");
                 }
-
                 navigation.navigate("Home");
             })
             .catch((err) => console.log(err));
     };
     return (
         <>
-            <View>
-                <Text>Available Loans</Text>
-                <View>
-                    <Text>{loan.amount} crd</Text>
-                    <Text>Rate: {loan.rate}%</Text>
-                    <Text>Term: {loan.termInDays} days</Text>
-                    <Text>Type: {loan.type}</Text>
-                    <Button title="Take out" onPress={handleTakeOutLoan} />
-                </View>
+            <View style={styles.container}>
+                <ImageBackground source={require("../assets/backgroundShips.jpg")} style={styles.image}>
+                    <Text style={{ fontSize: 30, marginBottom: 20, color: "white" }}>Available Loans</Text>
+                    <View style={styles.loanContainer}>
+                        <Text>{loan.amount} crd</Text>
+                        <Text>Rate: {loan.rate}%</Text>
+                        <Text>Term: {loan.termInDays} days</Text>
+                        <Text>Type: {loan.type}</Text>
+                        <Button title="Take out" onPress={handleTakeOutLoan} />
+                    </View>
+                </ImageBackground>
             </View>
         </>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    image: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    loanContainer: {
+        padding: 20,
+        borderRadius: 7,
+        borderWidth: 1,
+        borderColor: "black",
+        backgroundColor: "white",
+    },
+});
 
 export default Loans;
